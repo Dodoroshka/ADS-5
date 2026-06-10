@@ -1,6 +1,7 @@
 // Copyright 2025 NNTU-CS
 #include <cctype>
 #include <map>
+#include <string>
 #include "tstack.h"
 std::string infx2pstfx(const std::string& inf) {
     std::map<char, int> priority;
@@ -54,7 +55,7 @@ std::string infx2pstfx(const std::string& inf) {
     return res;
 }
 int eval(const std::string& post) {
-    TStack<int, 100> st;   
+    TStack<int, 100> st;
     for (size_t i = 0; i < post.length(); ++i) {
         char c = post[i];
         if (c == ' ') continue;
@@ -72,7 +73,7 @@ int eval(const std::string& post) {
             if (c == '+') {
                 st.push(a + b);
             } else if (c == '-') {
-                st.push(a - b); 
+                st.push(a - b);
             } else if (c == '*') {
                 st.push(a * b);
             } else {
