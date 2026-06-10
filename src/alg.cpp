@@ -9,15 +9,11 @@ std::string infx2pstfx(const std::string& inf) {
     priority['*'] = 2;
     priority['/'] = 2;
     priority['('] = 0;
-    
     TStack<char, 100> st;
     std::string res;
-    
     for (size_t i = 0; i < inf.length(); ++i) {
         char c = inf[i];
-        
         if (c == ' ') continue;
-        
         if (std::isdigit(c)) {
             while (i < inf.length() && std::isdigit(inf[i])) {
                 res += inf[i];
@@ -45,7 +41,6 @@ std::string infx2pstfx(const std::string& inf) {
             st.push(c);
         }
     }
-    
     while (!st.isEmpty()) {
         if (st.get() != '(') {
             res += st.get();
@@ -53,22 +48,16 @@ std::string infx2pstfx(const std::string& inf) {
         }
         st.pop();
     }
-    
     if (res.length() > 0 && res[res.length() - 1] == ' ') {
         res.resize(res.length() - 1);
     }
-    
     return res;
 }
-
 int eval(const std::string& post) {
-    TStack<int, 100> st;
-    
+    TStack<int, 100> st;   
     for (size_t i = 0; i < post.length(); ++i) {
         char c = post[i];
-        
         if (c == ' ') continue;
-        
         if (std::isdigit(c)) {
             int num = 0;
             while (i < post.length() && std::isdigit(post[i])) {
@@ -80,12 +69,15 @@ int eval(const std::string& post) {
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             int b = st.get(); st.pop();
             int a = st.get(); st.pop();
-            
-            if (c == '+') 
-                st.push(a + b); else if (c == '-')
-                st.push(a - b); else if (c == '*')
-                    st.push(a * b); else
-                    st.push(a / b);
+            if (c == '+') {
+                st.push(a + b);
+            } else if (c == '-') {
+                st.push(a - b); 
+            } else if (c == '*') {
+                st.push(a * b);
+            } else {
+                st.push(a / b);
+            }
         }
     }
     return st.get();
