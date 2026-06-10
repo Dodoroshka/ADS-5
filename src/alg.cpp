@@ -1,10 +1,9 @@
 // Copyright 2025 NNTU-CS
-#include "tstack.h"
 #include <cctype>
 #include <map>
 #include <string>
 #include <functional>
-
+#include "tstack.h"
 std::string infx2pstfx(const std::string& inf) {
     std::map<char, int> priority;
     priority['+'] = 1;
@@ -89,6 +88,5 @@ int eval(const std::string& post) {
             st.push(result);
         }
     }
-    
     return st.get();
 }
